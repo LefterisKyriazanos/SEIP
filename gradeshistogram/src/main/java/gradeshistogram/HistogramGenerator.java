@@ -70,9 +70,7 @@ public class HistogramGenerator {
 
 				Integer[] gradesArray = grades.toArray(new Integer[0]);
 
-				for (Integer s : gradesArray) {
-					System.out.println(s);
-				}
+
 				// create a HistogramGenerator Object
 				HistogramGenerator hg = new HistogramGenerator();
 				// call generateChart, while giving the grades array as argument
