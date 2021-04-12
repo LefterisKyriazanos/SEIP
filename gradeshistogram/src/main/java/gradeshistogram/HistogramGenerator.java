@@ -1,10 +1,10 @@
+package gradeshistogram;
 
 
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import org.jfree.chart.ChartFactory;
@@ -18,42 +18,49 @@ public class HistogramGenerator {
 
 
 
-	public static void main(String[] args) throws IOException {
-		HistogramGenerator hg = new HistogramGenerator();
-		int[] Grades = hg.readGrades();
-		hg.generateChart(Grades);
+	public static void main(String[] args) throws FileNotFoundException {
+		
 
-	}
 
-	private BufferedReader br;
+		if (args.length == 0) {
+			System.out.println(
+					"Proper Usage is: $ java -jar path-to-jar-file path-to-grades-file");
+			System.exit(0);
+		
 
-	public int[] readGrades() throws IOException {
-		int[] Grades = new int[150];
-		int studentIndex = 0;
-		try {
-			System.out.println("Please type the path to the txt file");
-			Scanner input = new Scanner(System.in);
-			String filename = input.nextLine();
-			br = new BufferedReader(new FileReader(filename));
-			String sCurrentLine;
-			while ((sCurrentLine = br.readLine()) != null) {
+	}	else {
+			try {
+				File file = new File(args[0]);
+				Scanner grades_file = new Scanner(file);
+				List<Integer> grades = new ArrayList<Integer>();
+				while (grades_file.hasNext()) {
+					// find next line
+					float grade1 = grades_file.nextInt();
+					grades.add((int) grade1);
+				}
+				grades_file.close();
 
-				System.out.println(sCurrentLine);
-				Grades[studentIndex] = Integer.parseInt(sCurrentLine);
-				studentIndex += 1;
+				Integer[] gradesArray = grades.toArray(new Integer[0]);
+
+				for (Integer s : gradesArray) {
+					System.out.println(s);
+				}
+				HistogramGenerator hg = new HistogramGenerator();
+				hg.generateChart(gradesArray);
+			} catch (Exception e) {
+				System.out.println(e);
+				System.out.println(
+						"Proper Usage is: $ java -jar path-to-jar-file path-to-grades-file");
+				System.exit(0);
 			}
-			System.out.println(Arrays.toString(Grades));
-			input.close();
-			
-		} catch (FileNotFoundException e) {
-			System.out.println("An error occurred.");
-			e.printStackTrace();
-		}
-		return Grades;
+    }
+		
 	}
+
 	
 	
-	public void generateChart(int[] dataValues) {
+	
+	public void generateChart(Integer[] gradesArray) {
 		/*
 		 * The XYSeriesCollection object is a set XYSeries series (dataset) that
 		 * can be visualized in the same chart
@@ -69,8 +76,8 @@ public class HistogramGenerator {
 		 * Populating the XYSeries data object from the input Integer array
 		 * values.
 		 */
-		for (int i = 0; i < dataValues.length; i++) {
-			data.add(i, dataValues[i]);
+		for (int i = 0; i < gradesArray.length; i++) {
+			data.add(i, gradesArray[i]);
 		}
 
 		// add the series to the dataset
