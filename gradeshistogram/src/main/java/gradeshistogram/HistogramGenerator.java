@@ -73,8 +73,15 @@ public class HistogramGenerator {
 
 				// create a HistogramGenerator Object
 				HistogramGenerator hg = new HistogramGenerator();
+
 				// call generateChart, while giving the grades array as argument
 				hg.generateChart(gradesArray);
+
+				// inform the user about handling the program
+				System.out
+						.println("The histogram will pop up in a new window!");
+				System.out.println("Press CTRL + C to exit");
+
 				// catch block if FileNotFoundException Exception raises
 			} catch (Exception e) {
 				System.out.println(e);
