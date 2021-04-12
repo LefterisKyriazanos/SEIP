@@ -14,6 +14,15 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+/***
+ * 
+ * @author LefterisKyriazanos The purpose of this class is to read a text file
+ *         of Student grades (on runtime), store it in an Integer Array and
+ *         create its Histogram by calling the generateChart method
+ * 
+ * 
+ */
+
 public class HistogramGenerator {
 
 
@@ -21,15 +30,34 @@ public class HistogramGenerator {
 	public static void main(String[] args) throws FileNotFoundException {
 		
 
-
+		/***
+		 * checks if the user gave a text file path. If not, a message that
+		 * suggests the right way to call the program is printed. Program
+		 * Terminates and the user has to call it again
+		 */
 		if (args.length == 0) {
 			System.out.println(
 					"Proper Usage is: $ java -jar path-to-jar-file path-to-grades-file");
 			System.exit(0);
 		
-
+			/***
+			 * If the user has given a Path for a text file this block (else) is
+			 * executed.
+			 * 
+			 * case 1: the user has given an invalid Path an exception is raised
+			 * and a message that suggests the right way to call the program is
+			 * printed. Also the exception message is printed. Program
+			 * Terminates and the user has to call it again
+			 * 
+			 * case 2: the user has given a proper text file Path. The file is
+			 * read and stored in an Integer Array. The Array is passed to
+			 * generateChart method.
+			 * 
+			 */
 	}	else {
+			// try block
 			try {
+				// read file and store to Integer Array (gradesArray)
 				File file = new File(args[0]);
 				Scanner grades_file = new Scanner(file);
 				List<Integer> grades = new ArrayList<Integer>();
@@ -45,8 +73,11 @@ public class HistogramGenerator {
 				for (Integer s : gradesArray) {
 					System.out.println(s);
 				}
+				// create a HistogramGenerator Object
 				HistogramGenerator hg = new HistogramGenerator();
+				// call generateChart, while giving the grades array as argument
 				hg.generateChart(gradesArray);
+				// catch block if FileNotFoundException Exception raises
 			} catch (Exception e) {
 				System.out.println(e);
 				System.out.println(
@@ -59,7 +90,13 @@ public class HistogramGenerator {
 
 	
 	
-	
+	/***
+	 * 
+	 * original @author agkortzis The purpose of this class is to demonstrate a
+	 * simple scenario of a JFreeChart XYLine chart. i (@author
+	 * LefterisKyriazanos) just added a few modifications in order to show a
+	 * Chart Tittle and tittles for X,Y axis.
+	 */
 	public void generateChart(Integer[] gradesArray) {
 		/*
 		 * The XYSeriesCollection object is a set XYSeries series (dataset) that
