@@ -4,6 +4,7 @@ package gradeshistogram;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -69,13 +70,17 @@ public class HistogramGenerator {
 				grades_file.close();
 
 				Integer[] gradesArray = grades.toArray(new Integer[0]);
-
+				Integer[] freq = new Integer[11];
 
 				// create a HistogramGenerator Object
 				HistogramGenerator hg = new HistogramGenerator();
 
-				// call generateChart, while giving the grades array as argument
-				hg.generateChart(gradesArray);
+				// call countFrequency, to get the frequency of each grade
+				freq = hg.countFrequency(gradesArray);
+
+				// call generateChart, while giving the grades frequency array
+				// as argument
+				hg.generateChart(freq);
 
 				// inform the user about handling the program
 				System.out
@@ -131,7 +136,8 @@ public class HistogramGenerator {
 
 		// Declare and initialize a createXYLineChart JFreeChart
 		JFreeChart chart = ChartFactory.createXYLineChart(
-				"Student Grades Histogram", "Student ID", "Grade", dataset,
+				"Student Grades Frequency Histogram", "Grade", "Frequency",
+				dataset,
 				PlotOrientation.VERTICAL, legend, tooltips, urls);
 
 		/*
@@ -142,6 +148,33 @@ public class HistogramGenerator {
 		frame.pack();
 		// makes the previously created frame visible
 		frame.setVisible(true);
+	}
+
+	/*
+	 * This method takes the Student Grades array and counts the frequency of
+	 * each element
+	 */
+	public Integer[] countFrequency(Integer[] gradesArray) {
+
+		// Array fr will store frequencies of element
+		Integer[] fr = new Integer[11];
+		boolean[] visited = new boolean[11];
+		for (int i = 0; i < gradesArray.length; i++) {
+
+			if (!visited[gradesArray[i]]) {
+				int count = 1;
+				for (int j = i + 1; j < gradesArray.length; j++) {
+					if (gradesArray[i] == gradesArray[j]) {
+						count++;
+						visited[gradesArray[i]] = true;
+					}
+				}
+
+				fr[gradesArray[i]] = count;
+			}
+		}
+		System.out.println(Arrays.toString(fr));
+		return fr;
 	}
 
 }
