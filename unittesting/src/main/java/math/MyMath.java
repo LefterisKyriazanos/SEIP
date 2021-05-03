@@ -20,7 +20,7 @@ public class MyMath {
 		if (n < 0 || n > 12)
 			throw new IllegalArgumentException("n should be between 0 and 12");
 		int factorial = 1;
-		for (int i = 2; i <= n; ++i) {
+		for (int i = 2; i <= n; i++) {
 			factorial *= i;
 		}
 		return factorial;
