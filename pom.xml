@@ -27,5 +27,6 @@
 	 <!-- Declare gradeshistogram as a module of this Maven project-->
 	<modules>
 		<module>gradeshistogram</module>
+		<module>unittesting</module>
 	</modules>
 </project>
