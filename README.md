@@ -1,5 +1,6 @@
 # SEIP
 
+[![Build Status](https://travis-ci.com/LefterisKyriazanos/SEIP.svg?token=8y5kSJ8xcysLgSMNifGc&branch=main)](https://travis-ci.com/LefterisKyriazanos/SEIP)
 
 The purpose of this repository is to create a Maven project with modules. 
 This is an assignment of the class "Software Engineering In Practice" i took as a Student of the Department of Management Science and Technology at the 
