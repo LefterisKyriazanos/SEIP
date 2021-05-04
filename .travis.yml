@@ -10,7 +10,7 @@ before_install:
  - sudo apt update # Update the package list
 
 script: # Build the project
- - mvn clean package
+ - mvn clean package jacoco:report
  - mvn test -B
 after_success: # Notify users about the result
  - echo “Process terminated successfully”
