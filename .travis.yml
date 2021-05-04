@@ -11,5 +11,6 @@ before_install:
 
 script: # Build the project
  - mvn clean package
+ - mvn test -B
 after_success: # Notify users about the result
  - echo “Process terminated successfully”
