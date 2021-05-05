@@ -28,8 +28,9 @@ public class ArrayOperations {
 				primesList.add(int_array[i]);
 			}
 		}
-
+		
 		return primesList.stream().mapToInt(i -> i).toArray();
+
 	}
 
 }
