@@ -2,7 +2,9 @@ package unittesting;
 
 import static org.junit.Assert.assertArrayEquals;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import io.FileIO;
 
@@ -14,6 +16,9 @@ public class FileIOTest {
 	public void test_readFile() {
 
 		int[] methodOutput = fi.readFile("./src/test/resources/grades.txt");
+
+		// i have manually created the int array that corresponds to the above
+		// file
 		int[] expected = {4, 9, 10, 7, 0, 7, 2, 8, 2, 0, 0, 5, 8, 3, 9, 5, 8, 5,
 				6, 3, 4, 5, 1, 7, 5, 8, 2, 8, 7, 4, 2, 2, 9, 0, 2, 10, 3, 8, 1,
 				2, 0, 1, 6, 1, 6, 5, 9, 9, 10, 7, 8, 1, 7, 7, 0, 9, 1, 6, 3, 2,
@@ -25,6 +30,18 @@ public class FileIOTest {
 
 		// verify that the readFile output is equal to the expected
 		assertArrayEquals(expected, methodOutput);
+	}
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+
+	@Test
+	public void test_readFile_non_existing_file_exception() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Input file does not exist");
+
+		// give a path to a file that does not exist
+		fi.readFile("./src/test/resources/nonexisting.txt");
 	}
 
 }
