@@ -42,12 +42,12 @@ public class MyMath {
 		if (n < 2)
 			throw new IllegalArgumentException(
 					"n should not be smaller than 2");
-		boolean flag = false;
+		boolean flag = true;
 
 		for (int i = 2; i <= n / 2; ++i) {
 			// condition for nonprime number
 			if (n % i == 0) {
-				flag = true;
+				flag = false;
 				break;
 			}
 		}
