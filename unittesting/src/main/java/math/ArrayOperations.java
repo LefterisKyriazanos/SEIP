@@ -23,7 +23,8 @@ public class ArrayOperations {
 		int[] int_array = fileIo.readFile(filepath);
 		for (int i = 0; i < int_array.length; i++) {
 
-			if (myMath.isPrime(int_array[i])) {
+			if (myMath.isPrime(int_array[i])
+					&& !primesList.contains(int_array[i])) {
 				primesList.add(int_array[i]);
 			}
 		}
