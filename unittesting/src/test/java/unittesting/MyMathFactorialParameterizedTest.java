@@ -12,7 +12,7 @@ import org.junit.runners.Parameterized.Parameters;
 import math.MyMath;
 
 @RunWith(Parameterized.class)
-public class MyMathParameterizedTest {
+public class MyMathFactorialParameterizedTest {
 
 	@Parameter(value = 0)
 	public int n;
@@ -31,6 +31,12 @@ public class MyMathParameterizedTest {
 
 	@Test
 	public void test_factorial() {
+
+		Assert.assertEquals(factorial, mm.factorial(n));
+	}
+	
+	@Test
+	public void test_isPrime() {
 
 		Assert.assertEquals(factorial, mm.factorial(n));
 	}

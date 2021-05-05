@@ -4,7 +4,7 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
-@Suite.SuiteClasses({MyMathTest.class, MyMathParameterizedTest.class})
+@Suite.SuiteClasses({MyMathTest.class, MyMathFactorialParameterizedTest.class})
 public class MyMathTestSuite {
 
 	// this class is empty. It's used as a holder
