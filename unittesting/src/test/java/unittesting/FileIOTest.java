@@ -44,4 +44,13 @@ public class FileIOTest {
 		fi.readFile("./src/test/resources/nonexisting.txt");
 	}
 
+	@Test
+	public void test_readFile_empty_file_exception() {
+		thrown.expect(IllegalArgumentException.class);
+		thrown.expectMessage("Given file is empty");
+
+		// give a path to an empty file
+		fi.readFile("./src/test/resources/empty_file.txt");
+	}
+
 }
