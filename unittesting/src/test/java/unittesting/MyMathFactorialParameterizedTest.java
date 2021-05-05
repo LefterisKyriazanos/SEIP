@@ -35,9 +35,4 @@ public class MyMathFactorialParameterizedTest {
 		Assert.assertEquals(factorial, mm.factorial(n));
 	}
 	
-	@Test
-	public void test_isPrime() {
-
-		Assert.assertEquals(factorial, mm.factorial(n));
-	}
 }
