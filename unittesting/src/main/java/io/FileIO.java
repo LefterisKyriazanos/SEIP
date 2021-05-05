@@ -34,12 +34,18 @@ public class FileIO {
 		
 		List<Integer> numbersList = new ArrayList<>();
 		BufferedReader reader;
+		
+		
 		try {
 			reader = new BufferedReader(new FileReader(file));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
-				int number = Integer.parseInt(line);
-				numbersList.add(number);
+				
+				//check if the line (string var) contains a positive integer of any lenght, using a REGEX
+				if ( line.matches("\\d+") ) {
+					int number = Integer.parseInt(line);
+					numbersList.add(number);
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

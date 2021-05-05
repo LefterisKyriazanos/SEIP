@@ -52,9 +52,10 @@ public class FileIOTest {
 		// give a path to an empty file
 		fi.readFile("./src/test/resources/empty_file.txt");
 	}
-
+	
 	@Test
 	public void testReadFileContainsInvalidEntries() {
+		
 
 		// give a path to a file that contains invalid inputs
 		fi.readFile("./src/test/resources/invalid_inputs.txt");
