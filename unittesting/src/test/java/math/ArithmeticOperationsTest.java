@@ -1,5 +1,7 @@
 package math;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -28,6 +30,11 @@ public class ArithmeticOperationsTest {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("The product does not fit in an Integer variable");
 		ao.multiply(Integer.MAX_VALUE, 2);
+	}
+
+	@Test
+	public void test_multiply() {
+		assertEquals(6, ao.multiply(3, 2));
 	}
 
 }
