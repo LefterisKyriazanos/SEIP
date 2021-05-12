@@ -1,10 +1,8 @@
-package unittesting;
+package math;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import math.ArithmeticOperations;
 
 public class ArithmeticOperationsTest {
 

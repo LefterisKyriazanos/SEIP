@@ -1,8 +1,6 @@
-package unittesting;
+package math;
 
 import org.junit.Test;
-
-import math.MyMath;
 
 public class MyMathTest {
 

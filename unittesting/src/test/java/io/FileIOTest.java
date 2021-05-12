@@ -1,12 +1,10 @@
-package unittesting;
+package io;
 
 import static org.junit.Assert.assertArrayEquals;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import io.FileIO;
 
 
 public class FileIOTest {

@@ -1,13 +1,12 @@
 
-package unittesting;
-import static org.mockito.Mockito.*;
+package math;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import io.FileIO;
-import math.ArrayOperations;
-import math.MyMath;
 
 public class ArrayOperationsTest {
 
