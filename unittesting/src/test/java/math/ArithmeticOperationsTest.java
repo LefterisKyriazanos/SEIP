@@ -31,10 +31,24 @@ public class ArithmeticOperationsTest {
 		thrown.expectMessage("The product does not fit in an Integer variable");
 		ao.multiply(Integer.MAX_VALUE, 2);
 	}
+	
+	@Test
+	public void test_divide_with_zero_exception() {
+		thrown.expect(ArithmeticException.class);
+		thrown.expectMessage("Cannot divide with zero");
+		ao.divide(5, 0);
+	}
 
 	@Test
 	public void test_multiply() {
 		assertEquals(6, ao.multiply(3, 2));
+	}
+	
+	// set off to a really small number
+	private static final double DELTA = 1e-15;
+	@Test
+	public void test_divide() {
+		assertEquals(25, ao.divide(125, 5),DELTA);
 	}
 
 }
