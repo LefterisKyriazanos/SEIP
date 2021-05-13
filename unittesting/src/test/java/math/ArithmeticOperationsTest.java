@@ -24,12 +24,23 @@ public class ArithmeticOperationsTest {
 		thrown.expectMessage("x & y should be >= 0");
 		ao.multiply(3, -2);
 	}
+	
+	public void test_multiply_border_case_zero() {
+		// x will be equal to 0
+		assertEquals(0, ao.multiply(0, 1));
+	}
 
 	@Test
 	public void test_multiply_integer_max_value_exception() {
 		thrown.expect(IllegalArgumentException.class);
 		thrown.expectMessage("The product does not fit in an Integer variable");
 		ao.multiply(Integer.MAX_VALUE, 2);
+	}
+	
+	@Test
+	public void test_multiply_border_case_int_max_val() {
+		// The product with be equal to Integer.MAX_VALUE
+		assertEquals(Integer.MAX_VALUE, ao.multiply(Integer.MAX_VALUE, 1));
 	}
 	
 	@Test
@@ -44,11 +55,13 @@ public class ArithmeticOperationsTest {
 		assertEquals(6, ao.multiply(3, 2));
 	}
 	
-	// set off to a really small number
+	// set off(DELTA) to a really small number
 	private static final double DELTA = 1e-15;
 	@Test
 	public void test_divide() {
 		assertEquals(25, ao.divide(125, 5),DELTA);
 	}
+	
+	
 
 }
