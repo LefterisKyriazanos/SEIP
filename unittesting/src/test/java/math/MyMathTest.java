@@ -33,7 +33,14 @@ public class MyMathTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void test_isPrime_n_smaller_than_2() {
-		mm.isPrime(-2);
+		try {
+			mm.isPrime(-2);
+		//Run exception throwing operation here
+		} catch(IllegalArgumentException ex) {
+			String expected_message = "n should not be smaller than 2";
+			assertEquals(expected_message, ex.getMessage());
+			throw ex;
+		}
 	}
 
 }
