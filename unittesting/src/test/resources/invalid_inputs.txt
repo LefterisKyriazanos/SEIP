@@ -1,0 +1,5 @@
+0
+10
+7.5
+"invalid input"
+8

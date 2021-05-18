@@ -1,5 +1,6 @@
 # SEIP
 
+[![Build Status](https://travis-ci.com/LefterisKyriazanos/SEIP.svg?token=8y5kSJ8xcysLgSMNifGc&branch=main)](https://travis-ci.com/LefterisKyriazanos/SEIP)
 
 The purpose of this repository is to create a Maven project with modules. 
 This is an assignment of the class "Software Engineering In Practice" i took as a Student of the Department of Management Science and Technology at the 
@@ -25,4 +26,4 @@ Then go the command line and run this command:
   Java 1.8
   Eclipse with its maven plugin installed
   
-
+I have also added another module called unittesting, which README.md you can find [here](./unittesting/README.md).
