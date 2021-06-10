@@ -18,11 +18,7 @@ import java.util.List;
  */
 public class SourceFileReader {
 	
-	private String type;
 	
-	public SourceFileReader(String _type) {
-		this.type = _type;
-	}
 
 	/**
 	 * Reads a file and returns its content in a List
@@ -34,9 +30,9 @@ public class SourceFileReader {
 	 * or null if the type is neither <b>local</b> nor <b>web</b>
 	 * @throws IOException
 	 */
-	public List<String> readFileIntoList(String filepath) throws IOException {
+	public List<String> readFileIntoList(String filepath, String type) throws IOException {
 		// read a locally stored file
-		if (type.contentEquals("local")) {
+		if (type.equals("local")) {
 			List<String> lines = new ArrayList<>();
 			File file = new File(filepath);
 			BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -47,7 +43,7 @@ public class SourceFileReader {
 			reader.close();
 			return lines;
 		// read a file stored in the web
-		} else if (type.contentEquals("web")) {
+		} else if (type.equals("web")) {
 			List<String> lines = new ArrayList<>();
 	        URL url = new URL(filepath);
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -72,9 +68,9 @@ public class SourceFileReader {
 	 * or null if the type is neither <b>local</b> nor <b>web</b>
 	 * @throws IOException
 	 */
-	public String readFileIntoString(String filepath) throws IOException {
+	public String readFileIntoString(String filepath, String type) throws IOException {
 		// read a locally stored file
-		if (type.contentEquals("local")) {
+		if (type.equals("local")) {
 			StringBuilder sb = new StringBuilder();
 			File file = new File(filepath);
 			BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -85,7 +81,7 @@ public class SourceFileReader {
 			reader.close();
 			return sb.toString();
 		// read a file stored in the web
-		} else if (type.contentEquals("web")) {
+		} else if (type.equals("web")) {
 			StringBuilder sb = new StringBuilder();
 	        URL url = new URL(filepath);
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
