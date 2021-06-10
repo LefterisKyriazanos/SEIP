@@ -18,15 +18,10 @@ import java.util.regex.Pattern;
  */
 public class SourceCodeAnalyzer {
 	
-	private SourceFileReader fileReader;
-	
-	public SourceCodeAnalyzer(String fileReaderType) {
-		this.fileReader = new SourceFileReader(fileReaderType);
-	}
 		
-	public int calculateLOC(String filepath, String analyzerType) throws IOException {
-		if(analyzerType.equals("regex")) {
-			String sourceCode = fileReader.readFileIntoString(filepath);
+	public int calculateRegexLOC(String sourceCode) throws IOException {
+		
+			
 			Pattern pattern = Pattern.compile("((//.*)|(/\\*.*)|(\\*+.*))");
 	        Matcher nonCodeLinesMatcher = pattern.matcher(sourceCode);
 
@@ -37,10 +32,12 @@ public class SourceCodeAnalyzer {
 			
 	        int sourceFileLength = sourceCode.split("\n").length;
 	        int loc =  sourceFileLength - nonCodeLinesCounter;
-	        
-			return loc;
-		} else if (analyzerType.equals("strcomp")) {
-			List<String> sourceCodeList = fileReader.readFileIntoList(filepath);
+	        return loc;
+	}
+		
+	public int calculateStringLOC(List<String> sourceCodeList) throws IOException {
+		
+			
 			int nonCodeLinesCounter = 0;
 			for (String line : sourceCodeList) {
 				line = line.stripLeading().stripTrailing(); //clear all leading and trailing white spaces
@@ -49,13 +46,12 @@ public class SourceCodeAnalyzer {
 			}
 			int loc = sourceCodeList.size() - nonCodeLinesCounter;
 			return loc; 
-		}
-		return -1;
+		
 	}
 	
-	public int calculateNOM(String filepath, String analyzerType) throws IOException {
-		if(analyzerType.equals("regex")) {
-			String sourceCode = fileReader.readFileIntoString(filepath);
+	public int calculateRegexNOM(String sourceCode) throws IOException {
+		
+			
 			Pattern pattern = Pattern.compile(".*(public |protected |private |static )?[\\w\\<\\>\\[\\]]+\\s+(\\w+) *\\([^\\)]*\\) *(\\{?|[^;]).*"); 
 	        Matcher methodSignatures = pattern.matcher(sourceCode);
 
@@ -64,8 +60,11 @@ public class SourceCodeAnalyzer {
 	        	methodCounter++;
 	        }
 			return methodCounter;
-		} else if (analyzerType.equals("strcomp")) {
-			List<String> sourceCodeList = fileReader.readFileIntoList(filepath);
+			
+	}
+	
+	public int calculateStringNOM(List<String> sourceCodeList) throws IOException {
+		
 			int methodCounter = 0;
 			for (String line : sourceCodeList) {
 				line = line.stripLeading().stripTrailing(); //clear all leading and trailing white spaces
@@ -75,13 +74,12 @@ public class SourceCodeAnalyzer {
 					methodCounter++;
 			}
 			return methodCounter; 
-		}
-		return -1;
+		
 	}
 	
-	public int calculateNOC(String filepath, String analyzerType) throws IOException {
-		if(analyzerType.equals("regex")) {
-			String sourceCode = fileReader.readFileIntoString(filepath);
+	
+	public int calculateRegexNOC(String sourceCode) throws IOException {
+		
 			Pattern pattern = Pattern.compile(".*\\s*class\\s+.*"); 
 	        Matcher classSignatures = pattern.matcher(sourceCode);
 
@@ -90,8 +88,11 @@ public class SourceCodeAnalyzer {
 	        	classCounter++;
 	        }
 			return classCounter;
-		} else if (analyzerType.equals("strcomp")) {
-			List<String> sourceCodeList = fileReader.readFileIntoList(filepath);
+	}
+	
+	public int calculateStringNOC(List<String> sourceCodeList) throws IOException {
+		
+		
 			int classCounter = 0;
 			for (String line : sourceCodeList) {
 				line = line.strip(); //remove leading and trailing white spaces
@@ -100,7 +101,7 @@ public class SourceCodeAnalyzer {
 				}
 			}
 			return classCounter; 
-		}
-		return -1;
+		
 	}
 }
+
