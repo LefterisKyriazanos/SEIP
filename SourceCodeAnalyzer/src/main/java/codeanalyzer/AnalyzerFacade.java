@@ -5,9 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class serves as a front-facing interface masking more complex underlying
+ * or structural code
+ * 
+ * Communicates directly with DemoClient and it defines an entry point to each
+ * subsystem
+ * 
+ * @author LefterisKyriazanos
+ *
+ */
 public class AnalyzerFacade {
 	
-	
+	/**
+	 * Takes the user arguments from the DemoClient and acts as the a client
+	 *
+	 */
 	public void codeAnalyzer(String filePath, String scaType, String location,
 			String outputFilePath, String outputFileType) throws IOException {
 
@@ -25,6 +38,7 @@ public class AnalyzerFacade {
 			} else if (location.equals("web")) {
 				sourceCode = fileReader.readWebFileIntoString(filePath);
 			} else {
+				// exit if @param location is not web or local
 				System.err.println("Invalid Source Code Location Type. Try web OR local");
 				System.exit(1);
 			}
@@ -40,6 +54,7 @@ public class AnalyzerFacade {
 			} else if (location.equals("web")) {
 				sourceCodeList = fileReader.readWebFileIntoList(filePath);
 			} else {
+				// exit if @param location is not web or local
 				System.err.println("Invalid Source Code Location Type. Try web OR local");
 				System.exit(1);
 			}
@@ -50,6 +65,7 @@ public class AnalyzerFacade {
 			noc = analyzer.calculateStringNOC(sourceCodeList);
 
 		}
+
 		if (loc != -1 && nom != -1 && noc != -1) {
 			Map<String, Integer> metrics = new HashMap<>();
 			metrics.put("loc", loc);
