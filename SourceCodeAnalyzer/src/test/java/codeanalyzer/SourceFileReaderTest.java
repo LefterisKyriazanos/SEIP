@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.util.List;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.CoreMatchers.containsString;
 
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
@@ -28,10 +30,10 @@ public class SourceFileReaderTest {
 	}
 	
 	@Test
-	public void testReadFileIntoListLocal() throws IOException {
+	public void testReadLocalFileIntoList() throws IOException {
 		//read a locally stored file into a List
-		sfr = new SourceFileReader(TYPE_LOCAL);
-		List<String> actualList = sfr.readFileIntoList(TEST_CLASS_LOCAL);
+		sfr = new SourceFileReader();
+		List<String> actualList = sfr.readLocalFileIntoList(TEST_CLASS_LOCAL);
 		
 		String[] expecteds = expectedList.stream().toArray(String[]::new);
 		String[] actuals = actualList.stream().toArray(String[]::new);
@@ -40,19 +42,19 @@ public class SourceFileReaderTest {
 	}
 	
 	@Test
-	public void testReadFileIntoStringLocal() throws IOException {
+	public void testReadLocalFileIntoString() throws IOException {
 		//read a locally stored file into a String
-		sfr = new SourceFileReader(TYPE_LOCAL);
-		String actuals = sfr.readFileIntoString(TEST_CLASS_LOCAL);
+		sfr = new SourceFileReader();
+		String actuals = sfr.readLocalFileIntoString(TEST_CLASS_LOCAL);
 				
 		assertEquals(expectedString, actuals);
 	}
 	
 	@Test
-	public void testReadFileIntoListWeb() throws IOException {
+	public void testReadWebFileIntoList() throws IOException {
 		//read a file stored in the web into a List
-		sfr = new SourceFileReader(TYPE_WEB);
-		List<String> actualList = sfr.readFileIntoList(TEST_CLASS_WEB);
+		sfr = new SourceFileReader();
+		List<String> actualList = sfr.readWebFileIntoList(TEST_CLASS_WEB);
 		
 		String[] expecteds = expectedList.stream().toArray(String[]::new);
 		String[] actuals = actualList.stream().toArray(String[]::new);
@@ -61,29 +63,34 @@ public class SourceFileReaderTest {
 	}
 	
 	@Test
-	public void testReadFileIntoStringWeb() throws IOException {
+	public void testreadWebFileIntoString() throws IOException {
 		//read a file stored in the web into a String
-		sfr = new SourceFileReader(TYPE_WEB);
-		String actuals = sfr.readFileIntoString(TEST_CLASS_WEB);
+		sfr = new SourceFileReader();
+		String actuals = sfr.readWebFileIntoString(TEST_CLASS_WEB);
 				
 		assertEquals(expectedString, actuals);
 	}
 	
-	@Test
-	public void testReadFileIntoListNull() throws IOException {
-		//give a none existing type to cause a null List return
-		sfr = new SourceFileReader("non-existing-type");
-		List<String> actualList = sfr.readFileIntoList("any-filepath");
-		
-		assertNull(actualList);
+	/*
+	@Test(expected = IOException.class)
+	public void testReadWebFileIntoListException() throws IOException {
+		try {
+			//give a none existing type to cause a null List return
+			sfr = new SourceFileReader();
+			sfr.readFileIntoList("any-filepath");
+		} catch (IOException ex) {
+			
+			assertThat(ex.getMessage(), containsString("java.io.FileNotFoundException"));
+		}
 	}
 	
 	@Test
 	public void testReadFileIntoStringNull() throws IOException {
-		//give a none existing type to cause a null String return
-		sfr = new SourceFileReader("non-existing-type");
-		String actualString = sfr.readFileIntoString("any-filepath");
+		give a none existing type to cause a null String return
+		sfr = new SourceFileReader();
+		String actualString = sfr.readFileIntoString("any-filepath", TYPE_LOCAL);
 		
 		assertNull(actualString);
 	}
+	*/
 }
