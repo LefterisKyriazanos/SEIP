@@ -45,10 +45,10 @@ public class SourceFileReader {
 			
 		} catch (FileNotFoundException ex) {
 			System.err.println("File does not exist. Please give a valid path.");
-			System.exit(1);
+			return null;
 		} catch (IOException ex2) {
 			System.err.println(ex2);
-			System.exit(1);
+			return null;
 		}
 	}
 			
@@ -78,10 +78,10 @@ public class SourceFileReader {
 			
 		} catch (FileNotFoundException ex) {
 			System.err.println("File does not exist. Please give a valid path.");
-			System.exit(1);
+			return null;
 		} catch (IOException ex2) {
 			System.err.println(ex2);
-			System.exit(1);
+			return null;
 		}
 			
 		
@@ -112,10 +112,10 @@ public class SourceFileReader {
 			
 		} catch (FileNotFoundException ex) {
 			System.err.println("File does not exist. Please give a valid path.");
-			System.exit(1);
+			return null;
 		} catch (IOException ex2) {
 			System.err.println(ex2);
-			System.exit(1);
+			return null;
 		}
 	}		
 			
@@ -146,10 +146,10 @@ public class SourceFileReader {
 			
 		} catch (FileNotFoundException ex) {
 			System.err.println("File does not exist. Please give a valid path.");
-			System.exit(1);
+			return null;
 		} catch (IOException ex2) {
 			System.err.println(ex2);
-			System.exit(1);
+			return null;
 		}
 	}
 
