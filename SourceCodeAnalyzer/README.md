@@ -22,4 +22,4 @@ You can call the program after building with Maven, by executing the below comma
 **arg3** -> Output file path 
 **arg4** -> Output file type (csv,json)
 
-![Class Diagram](images/ClassDiagram?raw=true "Class Diafram")
+![Class Diagram](images/ClassDiagram.jpg?raw=true)
