@@ -19,6 +19,7 @@ public class AnalyzerFacade {
 	
 	/**
 	 * Takes the user arguments from the DemoClient and acts as the a client
+	 * responsible for the order of operations
 	 *
 	 */
 	public void codeAnalyzer(String filePath, String scaType, String location,
@@ -33,6 +34,7 @@ public class AnalyzerFacade {
 		int noc = -1;
 
 		if (scaType.equals("regex")) {
+		// convert source file to String
 			if (location.equals("local")) {
 				sourceCode = fileReader.readLocalFileIntoString(filePath);
 			} else if (location.equals("web")) {
@@ -42,12 +44,13 @@ public class AnalyzerFacade {
 				System.err.println("Invalid Source Code Location Type. Try web OR local");
 				System.exit(1);
 			}
-
+			
+			// calculate metrics
 			loc = analyzer.calculateRegexLOC(sourceCode);
 			nom = analyzer.calculateRegexNOM(sourceCode);
 			noc = analyzer.calculateRegexNOC(sourceCode);
 		} else if (scaType.equals("strcomp")) {
-			
+			// convert source file to List<String>
 
 			if (location.equals("local")) {
 				sourceCodeList = fileReader.readLocalFileIntoList(filePath);
@@ -59,7 +62,7 @@ public class AnalyzerFacade {
 				System.exit(1);
 			}
 				
-				
+			// calculate metrics	
 			loc = analyzer.calculateStringLOC(sourceCodeList);
 			nom = analyzer.calculateStringNOM(sourceCodeList);
 			noc = analyzer.calculateStringNOC(sourceCodeList);
@@ -67,12 +70,17 @@ public class AnalyzerFacade {
 		}
 
 		if (loc != -1 && nom != -1 && noc != -1) {
+			// create the output file
 			Map<String, Integer> metrics = new HashMap<>();
 			metrics.put("loc", loc);
 			metrics.put("nom", nom);
 			metrics.put("noc", noc);
 			MetricsExporter exporter = new MetricsExporter();
 			exporter.writeFile(outputFileType, metrics, outputFilePath);
+			
+		} else {
+			System.err.println("An error occured");
+			System.exit(1);
 		}
 
 
