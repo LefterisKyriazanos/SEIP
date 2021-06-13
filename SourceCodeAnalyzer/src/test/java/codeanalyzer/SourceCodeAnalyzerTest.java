@@ -19,6 +19,7 @@ public class SourceCodeAnalyzerTest {
 	private SourceCodeAnalyzer sca = new SourceCodeAnalyzer();
 	private static SourceFileReader sfr = new SourceFileReader();
 
+	// create List<String> testSourceCode and String sourceCode
 	@BeforeClass
 	public static void setUp() throws IOException {
 		testSourceCode = sfr.readLocalFileIntoList(TEST_CLASS);
