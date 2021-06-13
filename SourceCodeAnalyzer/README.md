@@ -30,3 +30,12 @@ masking more complex underlying or structural code.
 I used it to provide a more simple interface to the system.
 
 This design pattern adds more layers to the sub-system and defines an entry point to each sub-system.
+
+**Drawbacks** 
+
+AnalyzerFacade class is complex with multiple ***If else blocks***.
+Expanding subsystems, as for example adding a new Analysis method different than REGEX and STRCOMP would require adding more if else blocks in the AnalyzerFacade class (more specifically the ***codeAnalyzer method***). Then the appropriate methods should be added to the class of the subsystem and of course the corresponding Test cases should be written. 
+
+A good way to reduce complexity and duplication of code, improving extensibility would be to apply the bridge design pattern between the SourceCodeAnalyzer class and the SourceFileReader class. 
+
+The MetricsExporter class can be extended easily right now by adding the appropriate export methods for the new file types. 
