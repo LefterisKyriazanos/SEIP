@@ -23,3 +23,10 @@ You can call the program after building with Maven, by executing the below comma
 **arg4** -> Output file type (csv,json)
 
 ![Class Diagram](images/ClassDiagram.jpg?raw=true)
+
+I used the Facade Design Pattern.
+The AnalyzerFacade class serves as a front-facing interface
+masking more complex underlying or structural code.
+I used it to provide a more simple interface to the system.
+
+This design pattern adds more layers to the sub-system and defines an entry point to each sub-system.
