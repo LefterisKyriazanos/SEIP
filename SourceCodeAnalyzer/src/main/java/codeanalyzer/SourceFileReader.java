@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 
 /**
  * Retrieves (reads) the contents of a given file.
@@ -25,31 +26,48 @@ public class SourceFileReader {
 	 * Reads a file and returns its content in a List
 	 * @param filepath the location of a locally stored file
 	 * @return a List that contains the contents of the file 
-	 * @throws IOException and FileNotFoundException
+	 * @exception NullPointerException when the given file does not exist 
+	 * @exception IOException when an IO interruption occurs (not required to be tested)
 	 */
-	public List<String> readLocalFileIntoList(String filepath) throws FileNotFoundException, IOException {
+	public List<String> readLocalFileIntoList(String filepath)  {
+		
+	
 		
 		// declare bufferedReader
 		BufferedReader reader = null;
+		List<String> lines = new ArrayList<>();
+		
+		
 		
 		try {
-			List<String> lines = new ArrayList<>();
+			
+			// if filepath is invalid then NullPointerException is raised
 			File file = new File(filepath);
+			
 			reader = new BufferedReader(new FileReader(file));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				lines.add(line);
 			}
-			reader.close();
-			return lines; 
+			reader.close(); 
 			
-		} catch (FileNotFoundException ex) {
-			System.err.println("File does not exist. Please give a valid path.");
-			return null;
+		} catch (NullPointerException ex1) {
+			ex1.printStackTrace();
+			System.out.println(ex1.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
+			
 		} catch (IOException ex2) {
-			System.err.println(ex2);
-			return null;
+			ex2.printStackTrace();
+			System.out.println(ex2.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
 		}
+		
+		
+		
+		return lines;
+		
 	}
 			
 		
@@ -57,66 +75,91 @@ public class SourceFileReader {
 	 * Reads a file and returns its content in a List
 	 * @param filepath the URL of a file stored in the web.
 	 * @return a List that contains the contents of the file 
-	 * @throws IOException and FileNotFoundException
+	 * @exception NullPointerException when the given file does not exist 
+	 * @exception IOException when an IO interruption occurs (not required to be tested)
 	 */
-	public List<String> readWebFileIntoList(String filepath) throws FileNotFoundException, IOException {
+	public List<String> readWebFileIntoList(String filepath)  {
 		
 		// declare bufferedReader
 		BufferedReader reader = null;
+		// read a file stored in the web
+		List<String> lines = new ArrayList<>();
+	    
+	    
 		
 		try {
-			// read a file stored in the web
-			List<String> lines = new ArrayList<>();
-	        URL url = new URL(filepath);
+			
+			URL url = new URL(filepath);
 	        reader = new BufferedReader(new InputStreamReader(url.openStream()));
 	        String line = null;
 	        while ((line = reader.readLine()) != null) {
 	        	lines.add(line);
 	        }
 	        reader.close();
-			return lines;
 			
-		} catch (FileNotFoundException ex) {
-			System.err.println("File does not exist. Please give a valid path.");
-			return null;
+		} catch (NullPointerException ex1) {
+			ex1.printStackTrace();
+			System.out.println(ex1.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
+			
 		} catch (IOException ex2) {
-			System.err.println(ex2);
-			return null;
-		}
-			
+			ex2.printStackTrace();
+			System.out.println(ex2.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
+		} 
 		
+		
+		
+		return lines;
 	}
 	
 	/**
 	 * Reads a file and returns its content in a String
 	 * @param filepath the location of a locally stored file.
 	 * @return a String that contains the contents of the file 
-	 * @throws IOException and FileNotFoundException
+	 * @exception NullPointerException when the given file does not exist 
+	 * @exception IOException when an IO interruption occurs (not required to be tested)
 	 */
-	public String readLocalFileIntoString(String filepath) throws FileNotFoundException, IOException {
+	public String readLocalFileIntoString(String filepath) {
+		
+		
+		
+		
 		
 		// declare bufferedReader
 		BufferedReader reader = null;
-		
+		// read a locally stored file
+		StringBuilder sb = new StringBuilder();
 		try {
-			// read a locally stored file
-			StringBuilder sb = new StringBuilder();
+			// if filepath is invalid then NullPointerException is raised
 			File file = new File(filepath);
+			
+		
 			reader = new BufferedReader(new FileReader(file));
 			String line = null;
 			while ((line = reader.readLine()) != null) {
 				sb.append(line + "\n");
 			}
 			reader.close();
-			return sb.toString();
+		
+		} catch (NullPointerException ex1) {
+			ex1.printStackTrace();
+			System.out.println(ex1.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
 			
-		} catch (FileNotFoundException ex) {
-			System.err.println("File does not exist. Please give a valid path.");
-			return null;
 		} catch (IOException ex2) {
-			System.err.println(ex2);
-			return null;
+			ex2.printStackTrace();
+			System.out.println(ex2.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
 		}
+		
+		
+		
+		return sb.toString();
 	}		
 			
 			
@@ -124,33 +167,42 @@ public class SourceFileReader {
 	 * Reads a file and returns its content in a String
 	 * @param filepath the URL of a file stored in the web.
 	 * @return a String that contains the contents of the file 
-	 * @throws IOException and FileNotFoundException
+	 * @exception NullPointerException when the given file does not exist 
+	 * @exception IOException when an IO interruption occurs (not required to be tested)
 	 */
-	public String readWebFileIntoString(String filepath) throws FileNotFoundException, IOException {
+	public String readWebFileIntoString(String filepath)  {
 		
 		// declare bufferedReader
 		BufferedReader reader = null;
-		
+		// read a file stored in the web
+		StringBuilder sb = new StringBuilder();
+	
+	    
 		try {
 			
-			// read a file stored in the web
-			StringBuilder sb = new StringBuilder();
-	        URL url = new URL(filepath);
+			URL url = new URL(filepath);
 	        reader = new BufferedReader(new InputStreamReader(url.openStream()));
 	        String line = null;
 	        while ((line = reader.readLine()) != null) {
 	        	sb.append(line + "\n");
 	        }
 	        reader.close();
-			return sb.toString();
 			
-		} catch (FileNotFoundException ex) {
-			System.err.println("File does not exist. Please give a valid path.");
-			return null;
+		} catch (NullPointerException ex1) {
+			ex1.printStackTrace();
+			System.out.println(ex1.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
+			
 		} catch (IOException ex2) {
-			System.err.println(ex2);
-			return null;
-		}
+			ex2.printStackTrace();
+			System.out.println(ex2.toString());
+			System.out.println("The system will now terminate");
+			System.exit(1);
+		} 
+		
+		
+		return sb.toString();
 	}
 
 }
