@@ -7,12 +7,22 @@ import java.nio.file.Files;
 import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.containsString;
-
+import java.net.MalformedURLException;
 import static org.junit.Assert.*;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import java.io.FileNotFoundException;
 import codeanalyzer.SourceFileReader;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SourceFileReaderTest {
 	SourceFileReader sfr = null;
@@ -22,6 +32,8 @@ public class SourceFileReaderTest {
 	private final static String TYPE_LOCAL = "local";
 	private final static String TEST_CLASS_LOCAL = "src/test/resources/TestClass.java";
 	private final static String TEST_CLASS_WEB ="https://drive.google.com/uc?export=download&id=1z51FZXqPyun4oeB7ERFlOgfcoDfLLLhg";
+	
+	
 	
 	@BeforeClass
 	public static void setUp() throws IOException {
@@ -71,26 +83,52 @@ public class SourceFileReaderTest {
 		assertEquals(expectedString, actuals);
 	}
 	
-	/*
-	@Test(expected = IOException.class)
-	public void testReadWebFileIntoListException() throws IOException {
-		try {
-			//give a none existing type to cause a null List return
-			sfr = new SourceFileReader();
-			sfr.readFileIntoList("any-filepath");
-		} catch (IOException ex) {
-			
-			assertThat(ex.getMessage(), containsString("java.io.FileNotFoundException"));
-		}
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
+	
+	@Test
+	public void testReadLocalFileIntoList_non_existing_file() {
+		
+		thrown.expect(NullPointerException.class);
+		
+
+		// give a path to a file that does not exist
+		sfr.readLocalFileIntoList("./src/test/resources/nonexisting.java");
+	}
+	
+	
+	
+	@Test
+	public void testReadLocalFileIntoString_non_existing_file() {
+		
+		thrown.expect(NullPointerException.class);
+		
+
+		// give a path to a file that does not exist
+		sfr.readLocalFileIntoList("./src/test/resources/nonexisting.java");
 	}
 	
 	@Test
-	public void testReadFileIntoStringNull() throws IOException {
-		give a none existing type to cause a null String return
-		sfr = new SourceFileReader();
-		String actualString = sfr.readFileIntoString("any-filepath", TYPE_LOCAL);
+	public void testReadWebFileIntoString_MalformedURL() {
 		
-		assertNull(actualString);
+		thrown.expect(NullPointerException.class);
+		
+
+		// give a path to a file that does not exist
+		sfr.readWebFileIntoString("https://drive.google.com/MalformedURL54543");
 	}
-	*/
+	
+	@Test
+	public void testReadWebFileIntoList_MalformedURL() {
+		
+		thrown.expect(NullPointerException.class);
+		
+
+		// give a path to a file that does not exist
+		sfr.readWebFileIntoList("https://drive.google.com/MalformedURL54543");
+	}
+	
+
+	
 }
