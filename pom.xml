@@ -51,9 +51,10 @@
 			</plugins>
 	</build> 
 	     
-	 <!-- Declare gradeshistogram as a module of this Maven project-->
+	 <!-- Declare modules of this Maven project-->
 	<modules>
 		<module>gradeshistogram</module>
 		<module>unittesting</module>
+		<module>SourceCodeAnalyzer</module>
 	</modules>
 </project>

@@ -26,4 +26,7 @@ Then go the command line and run this command:
   Java 1.8
   Eclipse with its maven plugin installed
   
-I have also added another module called unittesting, which README.md you can find [here](./unittesting/README.md).
+I have also added 2 more modules, which individual **README.md files** you can find here:
+
+1. [unittesting module](./unittesting/README.md)
+2. [SourceCodeAnalyzer module](./SourceCodeAnalyzer/README.md)
